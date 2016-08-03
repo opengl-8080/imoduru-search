@@ -1,17 +1,11 @@
 package imoduru.domain;
 
-import lombok.Value;
+public abstract class ColumnSearchCondition {
+    protected final Column column;
 
-@Value
-public class ColumnSearchCondition {
-    Column column;
-    CompareMethod compareMethod;
-
-    public ConditionExpression createConditionExpression(InputData inputData) {
-//        SqlStatement sqlStatement = new SqlStatement(this.column.getName() + " = ?");
-//        SearchValue searchValue = this.compareMethod.getSearchValue();
-//        BindParameter bindParameter = searchValue.createBindParameter(inputData);
-//        return new ConditionExpression(sqlStatement, bindParameter);
-        return null;
+    public ColumnSearchCondition(Column column) {
+        this.column = column;
     }
+
+    public abstract ConditionExpression createConditionExpression(InputData inputData);
 }

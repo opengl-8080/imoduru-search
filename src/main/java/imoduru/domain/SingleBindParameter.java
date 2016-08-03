@@ -20,6 +20,11 @@ public class SingleBindParameter implements BindParameter {
     Object value;
 
     @Override
+    public int size() {
+        return 1;
+    }
+
+    @Override
     public int setParameter(PreparedStatement ps, int index) {
         try {
             if (this.value instanceof LocalDate) {

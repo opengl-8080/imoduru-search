@@ -8,6 +8,12 @@ import java.sql.PreparedStatement;
 public interface BindParameter {
 
     /**
+     * この埋め込みパラメータが持つ値の数を返す.
+     * @return パラメータの数
+     */
+    int size();
+
+    /**
      * 指定した {@link PreparedStatement} にこのパラメータが持つ値をセットする.
      * @param ps {@link PreparedStatement}
      * @param index 値を埋め込むインデックス値
