@@ -11,7 +11,7 @@ public class FixedValue implements SearchValue {
     Object value;
 
     @Override
-    public BindParameter createBindParameter(InputInformation inputInformation) {
-        return new BindParameter(this.value);
+    public BindParameter createBindParameter(InputData inputData) {
+        return new SingleBindParameter(this.value);
     }
 }

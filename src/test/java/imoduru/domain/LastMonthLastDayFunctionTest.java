@@ -17,17 +17,20 @@ public class LastMonthLastDayFunctionTest {
     @Test
     public void 先月最終日が取得できる() throws Exception {
         // setup
-        LocalDate localDate = LocalDate.of(2016, 3, 10);
+        LocalDate today = LocalDate.of(2016, 3, 10);
         new Expectations() {{
-            DateUtil.today(); result = localDate;
+            DateUtil.today(); result = today;
         }};
 
         LastMonthLastDayFunction lastMonthFinalDateFunction = new LastMonthLastDayFunction();
 
         // exercise
-        BindParameter bindParameter = lastMonthFinalDateFunction.createBindParameter(null);
+        BindParameter actual = lastMonthFinalDateFunction.createBindParameter(null);
 
         // verify
-        assertThat(bindParameter).isEqualTo(new BindParameter(LocalDate.of(2016, 2, 29)));
+        LocalDate lastMonthLastDate = LocalDate.of(2016, 2, 29);
+        BindParameter expected = new SingleBindParameter(lastMonthLastDate);
+
+        assertThat(actual).isEqualTo(expected);
     }
 }

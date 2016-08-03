@@ -8,7 +8,7 @@ import imoduru.util.DateUtil;
 public class TodayFunction implements FunctionValue {
 
     @Override
-    public BindParameter createBindParameter(InputInformation inputInformation) {
-        return new BindParameter(DateUtil.today());
+    public BindParameter createBindParameter(InputData inputData) {
+        return new SingleBindParameter(DateUtil.today());
     }
 }

@@ -2,7 +2,6 @@ package imoduru.domain;
 
 import mockit.Mocked;
 import mockit.Verifications;
-import org.assertj.core.api.OffsetTimeAssert;
 import org.junit.Test;
 
 import java.sql.PreparedStatement;
@@ -10,14 +9,12 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import java.util.Arrays;
 import java.util.Date;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class BindParameterTest {
+public class SingleBindParameterTest {
 
     @Mocked
     private PreparedStatement ps;
@@ -25,7 +22,7 @@ public class BindParameterTest {
     @Test
     public void 内部に持つ値をPreparedStatementにセットする() throws Exception {
         // setup
-        BindParameter parameter = new BindParameter("123");
+        SingleBindParameter parameter = new SingleBindParameter("123");
 
         // exercise
         parameter.setParameter(ps, 1);
@@ -40,7 +37,7 @@ public class BindParameterTest {
     public void 内部値がLocalDateの場合_Dateに変換されてからセットされる() throws Exception {
         // setup
         LocalDate localDate = LocalDate.parse("2016-08-02");
-        BindParameter parameter = new BindParameter(localDate);
+        SingleBindParameter parameter = new SingleBindParameter(localDate);
 
         // exercise
         parameter.setParameter(ps, 1);
@@ -56,44 +53,14 @@ public class BindParameterTest {
     }
 
     @Test
-    public void Iterableを実装した値がセットされている場合_ループしながら値がセットされること() throws Exception {
-        // setup
-        Iterable<String> iterable = Arrays.asList("a", "b", "c");
-        BindParameter parameter = new BindParameter(iterable);
-
-        // exercise
-        parameter.setParameter(ps, 2);
-
-        // verify
-        new Verifications() {{
-            ps.setObject(2, "a"); times = 1;
-            ps.setObject(3, "b"); times = 1;
-            ps.setObject(4, "c"); times = 1;
-        }};
-    }
-
-    @Test
     public void 戻り値の値は_引数で渡したインデックスに内部でパラメータをセットした回数分加算した値が返されること_値がIterableでない場合() throws Exception {
         // setup
-        BindParameter parameter = new BindParameter("123");
+        SingleBindParameter parameter = new SingleBindParameter("123");
 
         // exercise
         int actual = parameter.setParameter(ps, 1);
 
         // verify
         assertThat(actual).isEqualTo(2);
-    }
-
-    @Test
-    public void 戻り値の値は_引数で渡したインデックスに内部でパラメータをセットした回数分加算した値が返されること_値がIterableの場合() throws Exception {
-        // setup
-        Iterable<String> iterable = Arrays.asList("a", "b", "c");
-        BindParameter parameter = new BindParameter(iterable);
-
-        // exercise
-        int actual = parameter.setParameter(ps, 1);
-
-        // verify
-        assertThat(actual).isEqualTo(4);
     }
 }

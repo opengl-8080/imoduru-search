@@ -4,5 +4,5 @@ package imoduru.domain;
  * 比較方法.
  */
 public interface CompareMethod {
-    SearchValue getSearchValue();
+    SqlStatement createSqlStatement(Column column, InputData inputData);
 }

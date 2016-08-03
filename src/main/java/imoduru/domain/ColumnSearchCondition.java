@@ -7,10 +7,11 @@ public class ColumnSearchCondition {
     Column column;
     CompareMethod compareMethod;
 
-    public ConditionExpression createConditionExpression(InputInformation inputInformation) {
-        SqlStatement sqlStatement = new SqlStatement(this.column.getName() + " = ?");
-        SearchValue searchValue = this.compareMethod.getSearchValue();
-        BindParameter bindParameter = searchValue.createBindParameter(inputInformation);
-        return new ConditionExpression(sqlStatement, bindParameter);
+    public ConditionExpression createConditionExpression(InputData inputData) {
+//        SqlStatement sqlStatement = new SqlStatement(this.column.getName() + " = ?");
+//        SearchValue searchValue = this.compareMethod.getSearchValue();
+//        BindParameter bindParameter = searchValue.createBindParameter(inputData);
+//        return new ConditionExpression(sqlStatement, bindParameter);
+        return null;
     }
 }

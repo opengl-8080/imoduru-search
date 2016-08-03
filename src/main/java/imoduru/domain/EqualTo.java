@@ -8,4 +8,9 @@ import lombok.Value;
 @Value
 public class EqualTo implements CompareMethod {
     SearchValue searchValue;
+
+    @Override
+    public SqlStatement createSqlStatement(Column column, InputData inputData) {
+        return null;
+    }
 }

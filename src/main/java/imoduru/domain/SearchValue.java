@@ -5,5 +5,5 @@ package imoduru.domain;
  */
 public interface SearchValue {
 
-    BindParameter createBindParameter(InputInformation inputInformation);
+    BindParameter createBindParameter(InputData inputData);
 }

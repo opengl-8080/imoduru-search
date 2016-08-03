@@ -17,9 +17,9 @@ public class TodayFunctionTest {
     @Test
     public void システム日付を持った埋め込みパラメータが生成される() throws Exception {
         // setup
-        LocalDate localDate = LocalDate.of(2016, 1, 2);
+        LocalDate today = LocalDate.of(2016, 1, 2);
         new Expectations() {{
-            DateUtil.today(); result = localDate;
+            DateUtil.today(); result = today;
         }};
 
         TodayFunction todayFunction = new TodayFunction();
@@ -28,6 +28,6 @@ public class TodayFunctionTest {
         BindParameter bindParameter = todayFunction.createBindParameter(null);
 
         // verify
-        assertThat(bindParameter).isEqualTo(new BindParameter(localDate));
+        assertThat(bindParameter).isEqualTo(new SingleBindParameter(today));
     }
 }

@@ -11,11 +11,11 @@ import java.time.temporal.TemporalAdjusters;
 public class LastMonthLastDayFunction implements FunctionValue {
 
     @Override
-    public BindParameter createBindParameter(InputInformation inputInformation) {
+    public BindParameter createBindParameter(InputData inputData) {
         LocalDate today = DateUtil.today();
         LocalDate lastMonth = today.minusMonths(1);
         LocalDate lastMonthLastDay = lastMonth.with(TemporalAdjusters.lastDayOfMonth());
 
-        return new BindParameter(lastMonthLastDay);
+        return new SingleBindParameter(lastMonthLastDay);
     }
 }

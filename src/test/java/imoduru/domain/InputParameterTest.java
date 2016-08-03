@@ -9,25 +9,27 @@ import static org.assertj.core.api.Assertions.*;
 public class InputParameterTest {
 
     @Mocked
-    private InputInformation inputInformation;
+    private InputData inputData;
 
     @Test
     public void name() throws Exception {
         // setup
         InputParameterName name = new InputParameterName("p1");
-        InputParameter inputParameter = new InputParameter(name);
 
-        FixedValue searchValue = new FixedValue("abc");
+        BindParameter expected = new SingleBindParameter("123");
+        SearchValue searchValue = (i) -> expected;
 
         new Expectations() {{
-            inputInformation.getSearchValue(name); result = searchValue;
+            inputData.getSearchValue(name); result = searchValue;
         }};
 
+        InputParameter inputParameter = new InputParameter(name);
+
         // exercise
-        BindParameter bindParameter = inputParameter.createBindParameter(inputInformation);
+        BindParameter actual = inputParameter.createBindParameter(inputData);
 
         // verify
-        assertThat(bindParameter).isEqualTo(new BindParameter(searchValue.getValue()));
+        assertThat(actual).isEqualTo(expected);
 
     }
 }
