@@ -28,7 +28,10 @@ public class EqualToTest {
     @Test
     public void 複数埋め込みパラメータの場合_埋め込みパラメータのサイズ文だけ_OR_で連結されたSQL文が生成される() throws Exception {
         // setup
-        BindParameter bindParameter = new MultiBindParameter(Arrays.asList(1, 2, 3));
+        BindParameter a = new SingleBindParameter(1);
+        BindParameter b = new SingleBindParameter(2);
+        BindParameter c = new SingleBindParameter(3);
+        BindParameter bindParameter = new MultiBindParameter(Arrays.asList(a, b, c));
         SearchValue searchValue = (i) -> bindParameter;
         EqualTo equalTo = new EqualTo(new Column("BAR"), searchValue);
 

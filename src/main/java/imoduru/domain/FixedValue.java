@@ -6,7 +6,7 @@ import lombok.Value;
  * 固定値.
  */
 @Value
-public class FixedValue implements SearchValue {
+public class FixedValue implements SingleSearchValue {
 
     Object value;
 

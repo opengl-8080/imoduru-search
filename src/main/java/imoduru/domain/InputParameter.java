@@ -6,7 +6,7 @@ import lombok.Value;
  * 入力パラメータ.
  */
 @Value
-public class InputParameter implements SearchValue {
+public class InputParameter implements MultiSearchValue {
     InputParameterName inputParameterName;
 
     @Override

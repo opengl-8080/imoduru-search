@@ -15,7 +15,7 @@ import java.util.Iterator;
 @RequiredArgsConstructor
 public class MultiBindParameter implements BindParameter {
 
-    Iterable<?> iterable;
+    Iterable<BindParameter> iterable;
     @NonFinal
     Integer sizeCache;
 
@@ -35,14 +35,10 @@ public class MultiBindParameter implements BindParameter {
 
     @Override
     public int setParameter(PreparedStatement ps, int index) {
-        try {
-            for (Object value : this.iterable) {
-                ps.setObject(index++, value);
-            }
-
-            return index;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        for (BindParameter singleBindParameter : this.iterable) {
+            index = singleBindParameter.setParameter(ps, index);
         }
+
+        return index;
     }
 }
