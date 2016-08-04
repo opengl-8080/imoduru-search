@@ -4,6 +4,7 @@ import mockit.Expectations;
 import mockit.Mocked;
 import org.junit.Test;
 
+import static imoduru.test.TestConstant.*;
 import static org.assertj.core.api.Assertions.*;
 
 public class InputParameterTest {
@@ -14,13 +15,13 @@ public class InputParameterTest {
     @Test
     public void name() throws Exception {
         // setup
-        InputParameterName name = new InputParameterName("p1");
+        InputParameterName name = new InputParameterName(SEARCH_DEFINITION_NAME_A, "p1");
 
         BindParameter expected = new SingleBindParameter("123");
         SearchValue searchValue = (i) -> expected;
 
         new Expectations() {{
-            inputData.getSearchValue(name); result = searchValue;
+            inputData.getInputParameterAsSearchValue(name); result = searchValue;
         }};
 
         InputParameter inputParameter = new InputParameter(name);

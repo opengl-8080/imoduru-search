@@ -1,11 +1,16 @@
 package imoduru.domain;
 
-import lombok.Value;
+import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 /**
  * 入力パラメータ名.
  */
-@Value
+@RequiredArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class InputParameterName {
-    String value;
+    private final SearchDefinitionName searchDefinitionName;
+    private final String name;
 }
