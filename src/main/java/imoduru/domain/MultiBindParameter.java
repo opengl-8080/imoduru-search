@@ -5,7 +5,6 @@ import lombok.Value;
 import lombok.experimental.NonFinal;
 
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.Iterator;
 
 /**
