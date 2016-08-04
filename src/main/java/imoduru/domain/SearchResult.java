@@ -13,7 +13,7 @@ public class SearchResult {
         this.tableSearchResultMap.put(table, tableSearchResult);
     }
 
-    public ColumnValues get(TableAlias tableAlias, Column column) {
+    public ColumnValues getColumnValues(TableAlias tableAlias, Column column) {
         TableSearchResult tableSearchResult = this.tableSearchResultMap.get(tableAlias);
         return tableSearchResult.getColumnValues(column);
     }
