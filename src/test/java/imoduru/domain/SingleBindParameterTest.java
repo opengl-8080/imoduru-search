@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.util.Date;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -62,5 +63,56 @@ public class SingleBindParameterTest {
 
         // verify
         assertThat(actual).isEqualTo(2);
+    }
+
+    @Test
+    public void pushした順序でコンバーターが適用されること() throws Exception {
+        // setup
+        SingleBindParameter parameter = new SingleBindParameter("123");
+
+        parameter.pushConverter((v) -> "[" + v + "]");
+        parameter.pushConverter((v) -> "{" + v + "}");
+
+        // exercise
+        parameter.setParameter(ps, 1);
+
+        // verify
+        new Verifications() {{
+            ps.setObject(1, "{[123]}"); times = 1;
+        }};
+    }
+
+    @Test
+    public void popで最後にpushしたコンバーターを抜き取れる() throws Exception {
+        // setup
+        SingleBindParameter parameter = new SingleBindParameter("123");
+
+        parameter.pushConverter((v) -> "[" + v + "]");
+        Converter expected = (v) -> "{" + v + "}";
+        parameter.pushConverter(expected);
+
+        // exercise
+        Optional<Converter> actual = parameter.popConverter();
+
+        // verify
+        assertThat(actual.get()).isSameAs(expected);
+    }
+
+    @Test
+    public void popで抜き取ったコンバーターは適用されなくなる() throws Exception {
+        // setup
+        SingleBindParameter parameter = new SingleBindParameter("123");
+
+        parameter.pushConverter((v) -> "[" + v + "]");
+        parameter.pushConverter((v) -> "{" + v + "}");
+
+        // exercise
+        parameter.popConverter();
+        parameter.setParameter(ps, 1);
+
+        // verify
+        new Verifications() {{
+            ps.setObject(1, "[123]"); times = 1;
+        }};
     }
 }
