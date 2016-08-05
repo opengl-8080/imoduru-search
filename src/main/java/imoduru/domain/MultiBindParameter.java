@@ -1,5 +1,6 @@
 package imoduru.domain;
 
+import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import lombok.experimental.NonFinal;
@@ -14,6 +15,7 @@ import java.util.Optional;
  * 複数埋め込みパラメータ.
  */
 @Value
+@EqualsAndHashCode(exclude = {"sizeCache", "converters"})
 @RequiredArgsConstructor
 public class MultiBindParameter implements BindParameter {
 

@@ -1,5 +1,6 @@
 package imoduru.domain;
 
+import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import lombok.experimental.NonFinal;
@@ -21,6 +22,7 @@ import java.util.function.Function;
  * 単一埋め込みパラメータ.
  */
 @Value
+@EqualsAndHashCode(exclude = "converters")
 @RequiredArgsConstructor
 public class SingleBindParameter implements BindParameter {
 
