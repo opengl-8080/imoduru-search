@@ -9,4 +9,8 @@ import lombok.Value;
 public class SortCondition {
     Column column;
     SortDirection sortDirection;
+
+    public String getRawSql() {
+        return this.column.getName() + " " + this.sortDirection.name();
+    }
 }
