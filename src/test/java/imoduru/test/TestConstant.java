@@ -7,6 +7,8 @@ import imoduru.domain.InputParameterName;
 import imoduru.domain.MultiBindParameter;
 import imoduru.domain.SearchDefinitionName;
 import imoduru.domain.SingleBindParameter;
+import imoduru.domain.SortCondition;
+import imoduru.domain.SortDirection;
 import imoduru.domain.SqlStatement;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.utility.ArrayIterate;
@@ -33,5 +35,9 @@ public class TestConstant {
         MutableList<BindParameter> parameters = ArrayIterate.collect(values, SingleBindParameter::new);
         BindParameter bindParameter = new MultiBindParameter(parameters);
         return new ConditionExpression(sqlStatement, bindParameter);
+    }
+
+    public static SortCondition createSortCondition(String column, SortDirection direction) {
+        return new SortCondition(new Column(column), direction);
     }
 }

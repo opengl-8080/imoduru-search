@@ -9,4 +9,8 @@ import org.eclipse.collections.api.list.ImmutableList;
 @Value
 public class SortConditions {
     ImmutableList<SortCondition> list;
+
+    public String getRawSql() {
+        return this.list.collect(SortCondition::getRawSql).makeString(", ");
+    }
 }
