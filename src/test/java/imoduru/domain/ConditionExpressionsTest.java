@@ -5,7 +5,6 @@ import mockit.Mocked;
 import mockit.Verifications;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.junit.Test;
 
 import java.sql.PreparedStatement;
@@ -16,6 +15,35 @@ public class ConditionExpressionsTest {
 
     @Mocked
     private PreparedStatement ps;
+
+    @Test
+    public void 条件式一覧の連結ができる() throws Exception {
+        // setup
+        MutableList<ConditionExpression> expressionList1 = Lists.mutable.of(
+                TestConstant.createConditionExpression("AAA", "a"),
+                TestConstant.createConditionExpression("BBB", "b")
+        );
+
+        ConditionExpressions expressions1 = new ConditionExpressions(expressionList1.toImmutable());
+
+        MutableList<ConditionExpression> expressionList2 = Lists.mutable.of(
+                TestConstant.createConditionExpression("CCC", "c"),
+                TestConstant.createConditionExpression("DDD", "d")
+        );
+
+        ConditionExpressions expressions2 = new ConditionExpressions(expressionList2.toImmutable());
+
+        // exercise
+        ConditionExpressions actual = expressions1.addAll(expressions2);
+
+        // verify
+        assertThat(actual.getExpressions()).containsExactly(
+            TestConstant.createConditionExpression("AAA", "a"),
+            TestConstant.createConditionExpression("BBB", "b"),
+            TestConstant.createConditionExpression("CCC", "c"),
+            TestConstant.createConditionExpression("DDD", "d")
+        );
+    }
 
     @Test
     public void 各条件式に対してパラメータの設定が順番に実行される() throws Exception {

@@ -1,12 +1,15 @@
 package imoduru.domain;
 
+import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.Value;
-import org.eclipse.collections.api.set.ImmutableSet;
+import org.eclipse.collections.api.list.ImmutableList;
 
 /**
  * 入力パラメータ定義.
  */
 @Value
 public class InputParameterDefinition {
-    ImmutableSet<InputParameterName> names;
+    @Getter(AccessLevel.PACKAGE)
+    ImmutableList<InputParameterName> names;
 }

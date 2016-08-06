@@ -1,5 +1,7 @@
 package imoduru.domain;
 
+import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.Value;
 
 /**
@@ -7,6 +9,8 @@ import lombok.Value;
  */
 @Value
 public class ConditionExpression {
+    @Getter(AccessLevel.PACKAGE)
     SqlStatement sqlStatement;
+    @Getter(AccessLevel.PACKAGE)
     BindParameter bindParameter;
 }

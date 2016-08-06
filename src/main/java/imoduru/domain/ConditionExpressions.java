@@ -1,7 +1,10 @@
 package imoduru.domain;
 
+import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.Value;
 import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.impl.factory.Lists;
 
 import java.sql.PreparedStatement;
 
@@ -10,6 +13,7 @@ import java.sql.PreparedStatement;
  */
 @Value
 public class ConditionExpressions {
+    @Getter(AccessLevel.PACKAGE)
     ImmutableList<ConditionExpression> expressions;
 
     /**
@@ -32,5 +36,14 @@ public class ConditionExpressions {
         for (ConditionExpression expression : this.expressions) {
             index = expression.getBindParameter().setParameter(ps, index);
         }
+    }
+
+    /**
+     * 指定した条件式一覧を結合した新しい条件式一覧を生成する.
+     * @param other 結合する条件式一覧
+     * @return 結合された新しい条件式一覧
+     */
+    public ConditionExpressions addAll(ConditionExpressions other) {
+        return new ConditionExpressions(this.expressions.newWithAll(other.expressions));
     }
 }

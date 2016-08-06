@@ -1,6 +1,8 @@
 package imoduru.domain;
 
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import lombok.experimental.NonFinal;
@@ -19,10 +21,15 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MultiBindParameter implements BindParameter {
 
+    @Getter(AccessLevel.PACKAGE)
     Iterable<BindParameter> iterable;
+
     @NonFinal
+    @Getter(AccessLevel.PACKAGE)
     Integer sizeCache;
+
     @NonFinal
+    @Getter(AccessLevel.PACKAGE)
     MutableList<Converter> converters = Lists.mutable.of();
 
     @Override

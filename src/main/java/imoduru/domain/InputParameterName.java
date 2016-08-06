@@ -1,16 +1,19 @@
 package imoduru.domain;
 
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+import lombok.Value;
 
 /**
  * 入力パラメータ名.
  */
-@RequiredArgsConstructor
-@ToString
-@EqualsAndHashCode
+@Value
 public class InputParameterName {
-    private final SearchDefinitionName searchDefinitionName;
-    private final String name;
+    @Getter(AccessLevel.PACKAGE)
+    SearchDefinitionName searchDefinitionName;
+    @Getter(AccessLevel.PACKAGE)
+    String name;
 }

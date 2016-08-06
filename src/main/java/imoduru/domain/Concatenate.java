@@ -1,5 +1,7 @@
 package imoduru.domain;
 
+import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.Value;
 
 /**
@@ -7,7 +9,9 @@ import lombok.Value;
  */
 @Value
 public class Concatenate implements MultiSearchValue {
+    @Getter(AccessLevel.PACKAGE)
     String prefix;
+    @Getter(AccessLevel.PACKAGE)
     SearchValue searchValue;
 
     @Override

@@ -1,5 +1,7 @@
 package imoduru.domain;
 
+import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.Value;
 import org.eclipse.collections.api.map.ImmutableMap;
 
@@ -8,6 +10,7 @@ import org.eclipse.collections.api.map.ImmutableMap;
  */
 @Value
 public class Record {
+    @Getter(AccessLevel.PACKAGE)
     ImmutableMap<Column, ColumnValue> columnValueMap;
 
     public ColumnValue get(Column column) {

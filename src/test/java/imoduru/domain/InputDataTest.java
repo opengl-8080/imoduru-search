@@ -1,5 +1,6 @@
 package imoduru.domain;
 
+import org.eclipse.collections.impl.factory.Maps;
 import org.junit.Test;
 
 import static imoduru.test.TestConstant.*;
@@ -8,41 +9,45 @@ import static org.assertj.core.api.Assertions.*;
 public class InputDataTest {
 
     @Test
-    public void パラメータ一覧を追加できる() throws Exception {
+    public void 指定したパラメータ一覧を追加した新しいインスタンスを生成できる() throws Exception {
         // setup
-        InputParameters inputParameters1 = new InputParameters();
-        inputParameters1.put(INPUT_PARAMETER_NAME_1, new FixedValue("aaa"));
-        inputParameters1.put(INPUT_PARAMETER_NAME_2, new FixedValue("bbb"));
-
-        InputParameters inputParameters2 = new InputParameters();
-        inputParameters2.put(INPUT_PARAMETER_NAME_3, new FixedValue("ccc"));
-
         InputData inputData = new InputData();
 
+        InputParameters inputParameters1 = new InputParameters(Maps.immutable.of(
+                INPUT_PARAMETER_NAME_1, new FixedValue("aaa"),
+                INPUT_PARAMETER_NAME_2, new FixedValue("bbb")
+        ));
+
+        inputData.setInputParameters(inputParameters1);
+
+        InputParameters inputParameters2 = new InputParameters(Maps.immutable.of(
+                INPUT_PARAMETER_NAME_3, new FixedValue("ccc")
+        ));
+
         // exercise
-        inputData.add(inputParameters1);
-        inputData.add(inputParameters2);
+        InputData newContext = inputData.newContext(inputParameters2);
 
         // verify
-        InputParameters actual = inputData.getInputParameters();
+        InputParameters expected = new InputParameters(Maps.immutable.of(
+                INPUT_PARAMETER_NAME_1, new FixedValue("aaa"),
+                INPUT_PARAMETER_NAME_2, new FixedValue("bbb"),
+                INPUT_PARAMETER_NAME_3, new FixedValue("ccc")
+        ));
 
-        InputParameters expected = new InputParameters();
-        expected.put(INPUT_PARAMETER_NAME_1, new FixedValue("aaa"));
-        expected.put(INPUT_PARAMETER_NAME_2, new FixedValue("bbb"));
-        expected.put(INPUT_PARAMETER_NAME_3, new FixedValue("ccc"));
-
-        assertThat(actual).isEqualTo(expected);
+        assertThat(newContext.getInputParameters()).as("入力パラメータ").isEqualTo(expected);
+        assertThat(newContext.getSearchResult()).as("検索結果").isSameAs(inputData.getSearchResult());
     }
 
     @Test
     public void パラメータ名を指定して検索値を取得できる() throws Exception {
         // setup
-        InputParameters inputParameters = new InputParameters();
-        inputParameters.put(INPUT_PARAMETER_NAME_1, new FixedValue("aaa"));
-        inputParameters.put(INPUT_PARAMETER_NAME_2, new FixedValue("bbb"));
+        InputParameters inputParameters = new InputParameters(Maps.immutable.of(
+            INPUT_PARAMETER_NAME_1, new FixedValue("aaa"),
+            INPUT_PARAMETER_NAME_2, new FixedValue("bbb")
+        ));
 
         InputData inputData = new InputData();
-        inputData.add(inputParameters);
+        inputData.setInputParameters(inputParameters);
 
         // exercise
         SearchValue searchValue = inputData.getInputParameterAsSearchValue(INPUT_PARAMETER_NAME_1);

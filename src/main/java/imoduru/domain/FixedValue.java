@@ -1,5 +1,7 @@
 package imoduru.domain;
 
+import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.Value;
 
 /**
@@ -7,7 +9,7 @@ import lombok.Value;
  */
 @Value
 public class FixedValue implements SingleSearchValue {
-
+    @Getter(AccessLevel.PACKAGE)
     Object value;
 
     @Override

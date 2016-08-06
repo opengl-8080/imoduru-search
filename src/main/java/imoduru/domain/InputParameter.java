@@ -1,5 +1,7 @@
 package imoduru.domain;
 
+import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.Value;
 
 /**
@@ -7,6 +9,7 @@ import lombok.Value;
  */
 @Value
 public class InputParameter implements MultiSearchValue {
+    @Getter(AccessLevel.PACKAGE)
     InputParameterName inputParameterName;
 
     @Override

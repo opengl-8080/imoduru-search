@@ -1,6 +1,8 @@
 package imoduru.domain;
 
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import lombok.experimental.NonFinal;
@@ -26,9 +28,11 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class SingleBindParameter implements BindParameter {
 
+    @Getter(AccessLevel.PACKAGE)
     Object value;
 
     @NonFinal
+    @Getter(AccessLevel.PACKAGE)
     MutableList<Converter> converters = Lists.mutable.of();
 
     @Override
