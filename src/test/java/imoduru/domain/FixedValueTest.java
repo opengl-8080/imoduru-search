@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.*;
 public class FixedValueTest {
 
     @Mocked @SuppressWarnings("unused")
-    private InputData inputData;
+    private Context context;
 
     @Test
     public void 固定値と同じ値をもつ埋め込みパラメータが生成される() throws Exception {
@@ -16,7 +16,7 @@ public class FixedValueTest {
         FixedValue fixedValue = new FixedValue("foo");
 
         // exercise
-        BindParameter bindParameter = fixedValue.createBindParameter(inputData);
+        BindParameter bindParameter = fixedValue.createBindParameter(context);
 
         // verify
         assertThat(bindParameter).isEqualTo(new SingleBindParameter("foo"));

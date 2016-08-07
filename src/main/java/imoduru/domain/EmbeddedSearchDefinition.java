@@ -11,8 +11,8 @@ public class EmbeddedSearchDefinition implements SearchDefinitionDetail {
     private InputParameters inputParameters;
 
     @Override
-    public void search(SearchResultCollector collector, InputData inputData) {
-        InputData newContext = inputData.newContext(this.inputParameters);
+    public void search(SearchResultCollector collector, Context context) {
+        Context newContext = context.newContext(this.inputParameters);
         this.searchDefinition.search(collector, newContext);
     }
 

@@ -20,7 +20,7 @@ public class BetweenTest {
         Between between = new Between(new Column("FOO"), from, to);
 
         // exercise
-        ConditionExpression conditionExpression = between.createConditionExpression(new InputData());
+        ConditionExpression conditionExpression = between.createConditionExpression(new Context());
 
         // verify
         assertThat(conditionExpression.getSqlStatement())

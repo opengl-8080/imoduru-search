@@ -2,8 +2,6 @@ package imoduru.domain;
 
 import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 import lombok.Value;
 import org.eclipse.collections.api.list.ImmutableList;
 
@@ -18,8 +16,8 @@ public class SearchResultValue implements MultiSearchValue {
     Column column;
 
     @Override
-    public BindParameter createBindParameter(InputData inputData) {
-        ColumnValues columnValues = inputData.getColumnValues(this.tableAlias, this.column);
+    public BindParameter createBindParameter(Context context) {
+        ColumnValues columnValues = context.getColumnValues(this.tableAlias, this.column);
 
         ImmutableList<BindParameter> bindParameters =
                 columnValues

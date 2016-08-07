@@ -16,7 +16,7 @@ public class EqualToTest {
         EqualTo equalTo = new EqualTo(new Column("FOO"), searchValue);
 
         // exercise
-        ConditionExpression conditionExpression = equalTo.createConditionExpression(new InputData());
+        ConditionExpression conditionExpression = equalTo.createConditionExpression(new Context());
 
         // verify
         assertThat(conditionExpression.getSqlStatement())
@@ -36,7 +36,7 @@ public class EqualToTest {
         EqualTo equalTo = new EqualTo(new Column("BAR"), searchValue);
 
         // exercise
-        ConditionExpression conditionExpression = equalTo.createConditionExpression(new InputData());
+        ConditionExpression conditionExpression = equalTo.createConditionExpression(new Context());
 
         // verify
         assertThat(conditionExpression.getSqlStatement())

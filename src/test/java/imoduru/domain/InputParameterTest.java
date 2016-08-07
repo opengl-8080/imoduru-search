@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 public class InputParameterTest {
 
     @Mocked
-    private InputData inputData;
+    private Context context;
 
     @Test
     public void name() throws Exception {
@@ -21,13 +21,13 @@ public class InputParameterTest {
         SearchValue searchValue = (i) -> expected;
 
         new Expectations() {{
-            inputData.getInputParameterAsSearchValue(name); result = searchValue;
+            context.getInputParameterAsSearchValue(name); result = searchValue;
         }};
 
         InputParameter inputParameter = new InputParameter(name);
 
         // exercise
-        BindParameter actual = inputParameter.createBindParameter(inputData);
+        BindParameter actual = inputParameter.createBindParameter(context);
 
         // verify
         assertThat(actual).isEqualTo(expected);

@@ -24,8 +24,8 @@ public abstract class ColumnSearchCondition {
 
     /**
      * 条件式を生成する.
-     * @param inputData 入力データ
+     * @param context コンテキスト
      * @return 条件式
      */
-    public abstract ConditionExpression createConditionExpression(InputData inputData);
+    public abstract ConditionExpression createConditionExpression(Context context);
 }

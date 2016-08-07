@@ -7,8 +7,8 @@ public interface SearchValue {
 
     /**
      * この検索値が持つ値をもとに、埋め込みパラメータを生成する.
-     * @param inputData 入力データ
+     * @param context コンテキスト
      * @return 埋め込みパラメータ
      */
-    BindParameter createBindParameter(InputData inputData);
+    BindParameter createBindParameter(Context context);
 }

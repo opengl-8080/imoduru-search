@@ -13,7 +13,7 @@ public class FixedValue implements SingleSearchValue {
     Object value;
 
     @Override
-    public BindParameter createBindParameter(InputData inputData) {
+    public BindParameter createBindParameter(Context context) {
         return new SingleBindParameter(this.value);
     }
 }

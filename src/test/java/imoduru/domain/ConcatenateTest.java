@@ -6,8 +6,6 @@ import org.junit.Test;
 
 import java.sql.PreparedStatement;
 
-import static org.assertj.core.api.Assertions.*;
-
 public class ConcatenateTest {
 
     @Mocked
@@ -20,7 +18,7 @@ public class ConcatenateTest {
         Concatenate concatenate = new Concatenate("Prefix", fixedValue);
 
         // exercise
-        BindParameter bindParameter = concatenate.createBindParameter(new InputData());
+        BindParameter bindParameter = concatenate.createBindParameter(new Context());
 
         // verify
         bindParameter.setParameter(ps, 1);

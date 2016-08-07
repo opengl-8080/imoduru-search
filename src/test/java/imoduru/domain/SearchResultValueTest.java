@@ -14,9 +14,9 @@ public class SearchResultValueTest {
     public void name() throws Exception {
         // setup
         SearchResultValue searchResultValue = new SearchResultValue(TABLE_ALIAS_FOO, NAME);
-        InputData inputData = new InputData();
+        Context context = new Context();
 
-        inputData.put(TABLE_ALIAS_FOO,
+        context.put(TABLE_ALIAS_FOO,
             new TableSearchResultBuilder()
                 .record(1, "name1", "value1")
                 .record(2, "name2", "value2")
@@ -25,7 +25,7 @@ public class SearchResultValueTest {
         );
 
         // exercise
-        BindParameter bindParameter = searchResultValue.createBindParameter(inputData);
+        BindParameter bindParameter = searchResultValue.createBindParameter(context);
 
         // verify
         BindParameter a = new SingleBindParameter("name1");

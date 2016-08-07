@@ -27,7 +27,7 @@ public class TableSearchConditionTest {
         tableSearchCondition.setSortConditions(sortConditions);
 
         // exercise
-        tableSearchCondition.search(collector, new InputData());
+        tableSearchCondition.search(collector, new Context());
 
         // verify
         ConditionExpressions expressions = createConditionExpressions(

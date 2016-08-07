@@ -23,14 +23,14 @@ public class SearchDefinitionTest {
             searchDefinitionDetail
         ));
 
-        InputData inputData = new InputData();
+        Context context = new Context();
 
         // exercise
-        searchDefinition.search(collector, inputData);
+        searchDefinition.search(collector, context);
 
         // verify
         new Verifications() {{
-            searchDefinitionDetail.search(collector, inputData); times = 3;
+            searchDefinitionDetail.search(collector, context); times = 3;
         }};
     }
 }

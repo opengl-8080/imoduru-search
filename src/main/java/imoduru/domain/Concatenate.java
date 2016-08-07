@@ -15,8 +15,8 @@ public class Concatenate implements MultiSearchValue {
     SearchValue searchValue;
 
     @Override
-    public BindParameter createBindParameter(InputData inputData) {
-        BindParameter bindParameter = this.searchValue.createBindParameter(inputData);
+    public BindParameter createBindParameter(Context context) {
+        BindParameter bindParameter = this.searchValue.createBindParameter(context);
         bindParameter.pushConverter(value -> this.prefix + value);
         return bindParameter;
     }

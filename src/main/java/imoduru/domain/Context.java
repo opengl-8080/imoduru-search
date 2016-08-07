@@ -3,9 +3,9 @@ package imoduru.domain;
 import org.eclipse.collections.impl.factory.Maps;
 
 /**
- * 入力情報.
+ * コンテキスト.
  */
-public class InputData {
+public class Context {
 
     private SearchResult searchResult = new SearchResult();
     private InputParameters inputParameters = new InputParameters(Maps.immutable.empty());
@@ -39,16 +39,16 @@ public class InputData {
     }
 
     /**
-     * 指定した入力パラメータ一覧を追加した、新しい入力データを生成する.
+     * 指定した入力パラメータ一覧を追加した、新しいコンテキストを生成する.
      * @param inputParameters 追加する入力パラメータ一覧
-     * @return 入力パラメータ一覧を追加した新しい入力データ
+     * @return 入力パラメータ一覧を追加した新しいコンテキスト
      */
-    public InputData newContext(InputParameters inputParameters) {
-        InputData inputData = new InputData();
-        inputData.searchResult = this.searchResult;
-        inputData.inputParameters = this.inputParameters.addAll(inputParameters);
+    public Context newContext(InputParameters inputParameters) {
+        Context context = new Context();
+        context.searchResult = this.searchResult;
+        context.inputParameters = this.inputParameters.addAll(inputParameters);
 
-        return inputData;
+        return context;
     }
 
     void setInputParameters(InputParameters inputParameters) {

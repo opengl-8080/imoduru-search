@@ -16,10 +16,10 @@ public class Between extends ColumnSearchCondition {
     }
 
     @Override
-    public ConditionExpression createConditionExpression(InputData inputData) {
+    public ConditionExpression createConditionExpression(Context context) {
         SqlStatement sqlStatement = new SqlStatement(this.column.getName() + " BETWEEN ? AND ?");
-        BindParameter fromParameter = this.from.createBindParameter(inputData);
-        BindParameter toParameter = this.to.createBindParameter(inputData);
+        BindParameter fromParameter = this.from.createBindParameter(context);
+        BindParameter toParameter = this.to.createBindParameter(context);
 
         return new ConditionExpression(sqlStatement, new MultiBindParameter(Arrays.asList(fromParameter, toParameter)));
     }

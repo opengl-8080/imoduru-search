@@ -18,9 +18,9 @@ public class TableSearchCondition implements SearchDefinitionDetail {
     }
 
     @Override
-    public void search(SearchResultCollector collector, InputData inputData) {
+    public void search(SearchResultCollector collector, Context context) {
         ImmutableList<ConditionExpression> expressions =
-                this.columnSearchConditions.collect(it -> it.createConditionExpression(inputData)).toImmutable();
+                this.columnSearchConditions.collect(it -> it.createConditionExpression(context)).toImmutable();
 
         collector.search(this.tableAlias, new ConditionExpressions(expressions), this.sortConditions);
     }

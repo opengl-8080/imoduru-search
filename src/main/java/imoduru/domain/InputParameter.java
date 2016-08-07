@@ -13,8 +13,8 @@ public class InputParameter implements MultiSearchValue {
     InputParameterName inputParameterName;
 
     @Override
-    public BindParameter createBindParameter(InputData inputData) {
-        SearchValue searchValue = inputData.getInputParameterAsSearchValue(this.inputParameterName);
-        return searchValue.createBindParameter(inputData);
+    public BindParameter createBindParameter(Context context) {
+        SearchValue searchValue = context.getInputParameterAsSearchValue(this.inputParameterName);
+        return searchValue.createBindParameter(context);
     }
 }

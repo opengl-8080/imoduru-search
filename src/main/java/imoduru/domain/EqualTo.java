@@ -21,8 +21,8 @@ public class EqualTo extends ColumnSearchCondition {
     }
 
     @Override
-    public ConditionExpression createConditionExpression(InputData inputData) {
-        BindParameter bindParameter = this.searchValue.createBindParameter(inputData);
+    public ConditionExpression createConditionExpression(Context context) {
+        BindParameter bindParameter = this.searchValue.createBindParameter(context);
 
         int size = bindParameter.size();
         StrBuilder sql = new StrBuilder();
