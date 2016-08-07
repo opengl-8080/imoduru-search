@@ -23,8 +23,8 @@ public class SearchResultTest {
                 .build();
 
         // exercise
-        ColumnValues fooColumnValues = searchResult.getColumnValues(new TableAlias("FOO"), NAME);
-        ColumnValues barColumnValues = searchResult.getColumnValues(new TableAlias("BAR"), VALUE);
+        ColumnValues fooColumnValues = searchResult.getColumnValues(TABLE_ALIAS_FOO, NAME);
+        ColumnValues barColumnValues = searchResult.getColumnValues(TABLE_ALIAS_BAR, VALUE);
 
         // verify
         assertThat(fooColumnValues.getValues()).containsExactly(
@@ -52,7 +52,7 @@ public class SearchResultTest {
                         .build();
 
         // exercise
-        ColumnValues columnValues = searchResult.getColumnValues(new TableAlias("BAR"), NAME);
+        ColumnValues columnValues = searchResult.getColumnValues(TABLE_ALIAS_BAR, NAME);
 
         // verify
         assertThat(columnValues.getValues()).isEmpty();

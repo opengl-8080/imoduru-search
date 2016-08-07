@@ -1,38 +1,42 @@
 package imoduru.domain;
 
-import imoduru.test.TestConstant;
+import mockit.Mocked;
+import mockit.Verifications;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static imoduru.test.TestConstant.*;
 
 public class TableSearchConditionTest {
 
+    @Mocked
+    private SearchResultCollector collector;
+
     @Test
-    public void カラム検索条件が生成した条件式をまとめて条件式一覧にした結果を取得できる() throws Exception {
+    public void 自身が持つ検索のための条件値を使って_コレクターに検索の指示を出す() throws Exception {
         // setup
-        Table table = new Table("FOO");
-        TableAlias alias = new TableAlias("foo");
-        TableSearchCondition tableSearchCondition = new TableSearchCondition(table, alias);
+        TableSearchCondition tableSearchCondition = new TableSearchCondition(TABLE_ALIAS_FOO);
 
-        Column barColumn = new Column("BAR");
-        SearchValue valueA = new FixedValue("a");
-        ColumnSearchCondition condition1 = new EqualTo(barColumn, valueA);
+        tableSearchCondition.add(createColumnSearchCondition("BAR", "a"));
+        tableSearchCondition.add(createColumnSearchCondition("FIZZ", "b"));
 
-        tableSearchCondition.add(condition1);
+        SortConditions sortConditions = createSortConditions(
+            createSortCondition("BAR", SortDirection.ASC),
+            createSortCondition("FIZZ", SortDirection.DESC)
+        );
 
-        Column fizzColumn = new Column("FIZZ");
-        SearchValue valueB = new FixedValue("b");
-        ColumnSearchCondition condition2 = new EqualTo(fizzColumn, valueB);
-
-        tableSearchCondition.add(condition2);
+        tableSearchCondition.setSortConditions(sortConditions);
 
         // exercise
-        ConditionExpressions conditionExpressions = tableSearchCondition.createConditionExpressions(new InputData());
+        tableSearchCondition.search(collector, new InputData());
 
         // verify
-        assertThat(conditionExpressions.getExpressions()).containsExactly(
-            TestConstant.createConditionExpression("(BAR = ?)", "a"),
-            TestConstant.createConditionExpression("(FIZZ = ?)", "b")
+        ConditionExpressions expressions = createConditionExpressions(
+            createConditionExpression("(BAR = ?)", "a"),
+            createConditionExpression("(FIZZ = ?)", "b")
         );
+
+        new Verifications() {{
+            collector.search(TABLE_ALIAS_FOO, expressions, sortConditions); times = 1;
+        }};
     }
 }

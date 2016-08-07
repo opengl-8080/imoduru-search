@@ -5,9 +5,9 @@ package imoduru.domain;
  */
 public interface SearchDefinitionDetail {
     /**
-     * 条件式一覧を生成する.
+     * 自身が持つ検索条件をもとに、指定したコレクターに検索を依頼する.
+     * @param collector 検索結果コレクター
      * @param inputData 入力データ
-     * @return 条件式一覧
      */
-    ConditionExpressions createConditionExpressions(InputData inputData);
+    void search(SearchResultCollector collector, InputData inputData);
 }

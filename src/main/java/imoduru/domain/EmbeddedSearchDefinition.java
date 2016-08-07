@@ -8,9 +8,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EmbeddedSearchDefinition implements SearchDefinitionDetail {
     private final SearchDefinition searchDefinition;
+    private InputParameters inputParameters;
 
     @Override
-    public ConditionExpressions createConditionExpressions(InputData inputData) {
-        return this.searchDefinition.createConditionExpressions(inputData);
+    public void search(SearchResultCollector collector, InputData inputData) {
+        InputData newContext = inputData.newContext(this.inputParameters);
+        this.searchDefinition.search(collector, newContext);
+    }
+
+    public void setInputParameters(InputParameters inputParameters) {
+        this.inputParameters = inputParameters;
     }
 }

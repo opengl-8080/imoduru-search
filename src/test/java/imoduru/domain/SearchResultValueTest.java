@@ -13,10 +13,10 @@ public class SearchResultValueTest {
     @Test
     public void name() throws Exception {
         // setup
-        SearchResultValue searchResultValue = new SearchResultValue(new TableAlias("FOO"), NAME);
+        SearchResultValue searchResultValue = new SearchResultValue(TABLE_ALIAS_FOO, NAME);
         InputData inputData = new InputData();
 
-        inputData.put(new TableAlias("FOO"),
+        inputData.put(TABLE_ALIAS_FOO,
             new TableSearchResultBuilder()
                 .record(1, "name1", "value1")
                 .record(2, "name2", "value2")

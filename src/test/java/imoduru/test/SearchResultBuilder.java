@@ -4,6 +4,7 @@ import imoduru.domain.Column;
 import imoduru.domain.ColumnValue;
 import imoduru.domain.Record;
 import imoduru.domain.SearchResult;
+import imoduru.domain.Table;
 import imoduru.domain.TableAlias;
 import imoduru.domain.TableSearchResult;
 import org.eclipse.collections.api.list.MutableList;
@@ -24,7 +25,7 @@ public class SearchResultBuilder {
             this.searchResult.put(this.tableAlias, new TableSearchResult(this.records.toImmutable()));
         }
 
-        this.tableAlias = new TableAlias(tableName);
+        this.tableAlias = new TableAlias(new Table(tableName), tableName);
         this.records = Lists.mutable.of();
         return this;
     }

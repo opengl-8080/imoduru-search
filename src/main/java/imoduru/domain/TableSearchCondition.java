@@ -9,25 +9,27 @@ import org.eclipse.collections.impl.factory.Lists;
  */
 public class TableSearchCondition implements SearchDefinitionDetail {
 
-    private final Table table;
     private final TableAlias tableAlias;
     private SortConditions sortConditions = new SortConditions(Lists.immutable.empty());
     private MutableList<ColumnSearchCondition> columnSearchConditions = Lists.mutable.empty();
 
-    public TableSearchCondition(Table table, TableAlias tableAlias) {
-        this.table = table;
+    public TableSearchCondition(TableAlias tableAlias) {
         this.tableAlias = tableAlias;
     }
 
     @Override
-    public ConditionExpressions createConditionExpressions(InputData inputData) {
+    public void search(SearchResultCollector collector, InputData inputData) {
         ImmutableList<ConditionExpression> expressions =
                 this.columnSearchConditions.collect(it -> it.createConditionExpression(inputData)).toImmutable();
 
-        return new ConditionExpressions(expressions);
+        collector.search(this.tableAlias, new ConditionExpressions(expressions), this.sortConditions);
     }
 
     public void add(ColumnSearchCondition columnSearchCondition) {
         this.columnSearchConditions.add(columnSearchCondition);
+    }
+
+    public void setSortConditions(SortConditions sortConditions) {
+        this.sortConditions = sortConditions;
     }
 }
