@@ -1,6 +1,6 @@
 package imoduru.domain.search.condition;
 
-import imoduru.domain.SearchResultCollector;
+import imoduru.domain.search.SearchResultCollector;
 import imoduru.domain.search.Context;
 import imoduru.domain.search.expression.ConditionExpressions;
 import imoduru.domain.search.sort.SortConditions;

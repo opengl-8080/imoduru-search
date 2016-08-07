@@ -30,4 +30,17 @@ public class SearchResult {
         TableSearchResult tableSearchResult = this.tableSearchResultMap.get(tableAlias);
         return tableSearchResult.getColumnValues(column);
     }
+
+    /**
+     * 指定した検索結果が、この検索結果と等しい結果を持つかどうかを確認する.
+     * @param searchResult 比較対象の検索結果
+     * @return 結果が等しい場合は true
+     */
+    public boolean hasSameValue(SearchResult searchResult) {
+        if (searchResult == null) {
+            return false;
+        }
+
+        return this.tableSearchResultMap.equals(searchResult.tableSearchResultMap);
+    }
 }

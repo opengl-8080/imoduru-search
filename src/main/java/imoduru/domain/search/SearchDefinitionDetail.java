@@ -1,7 +1,5 @@
 package imoduru.domain.search;
 
-import imoduru.domain.SearchResultCollector;
-
 /**
  * 検索定義明細.
  */

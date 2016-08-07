@@ -2,7 +2,7 @@ package imoduru.domain.search.condition;
 
 import imoduru.domain.search.Context;
 import imoduru.domain.search.SearchDefinitionDetail;
-import imoduru.domain.SearchResultCollector;
+import imoduru.domain.search.SearchResultCollector;
 import imoduru.domain.search.expression.ConditionExpression;
 import imoduru.domain.search.expression.ConditionExpressions;
 import imoduru.domain.search.sort.SortConditions;

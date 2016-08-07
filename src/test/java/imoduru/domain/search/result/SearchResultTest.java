@@ -8,20 +8,53 @@ import static imoduru.test.TestConstant.*;
 import static org.assertj.core.api.Assertions.*;
 
 public class SearchResultTest {
+    @Test
+    public void 検索結果が等しいかどうかを判定できる_比較相手がnullの場合() throws Exception {
+        // setup
+        SearchResult searchResult1 = this.createSearchResult();
+
+        // exercise
+        boolean actual = searchResult1.hasSameValue(null);
+
+        // verify
+        assertThat(actual).isFalse();
+    }
+
+    @Test
+    public void 検索結果が等しいかどうかを判定できる_等しくない場合() throws Exception {
+        // setup
+        SearchResult searchResult1 = this.createSearchResult();
+        SearchResult searchResult2 =
+            table(TABLE_ALIAS_FOO)
+                    .record(1, "name1", "value1")
+                    .record(2, "name2", "value2")
+                    .record(3, "name3", "value3")
+                    .build();
+
+        // exercise
+        boolean actual = searchResult1.hasSameValue(searchResult2);
+
+        // verify
+        assertThat(actual).isFalse();
+    }
+
+    @Test
+    public void 検索結果が等しいかどうかを判定できる_等しい場合() throws Exception {
+        // setup
+        SearchResult searchResult1 = this.createSearchResult();
+        SearchResult searchResult2 = this.createSearchResult();
+
+        // exercise
+        boolean actual = searchResult1.hasSameValue(searchResult2);
+
+        // verify
+        assertThat(actual).isTrue();
+    }
 
     @Test
     public void テーブル別名とカラムで検索結果の値を取得できる() throws Exception {
         // setup
-        SearchResult searchResult =
-                 table(TABLE_ALIAS_FOO)
-                .record(1, "name1", "value1")
-                .record(2, "name2", "value2")
-                .record(3, "name3", "value3")
-                .table(TABLE_ALIAS_BAR)
-                .record(4, "name4", "value4")
-                .record(5, "name5", "value5")
-                .record(6, "name6", "value6")
-                .build();
+        SearchResult searchResult = this.createSearchResult();
 
         // exercise
         ColumnValues fooColumnValues = searchResult.getColumnValues(TABLE_ALIAS_FOO, NAME);
@@ -39,6 +72,19 @@ public class SearchResultTest {
                 new ColumnValue("value5"),
                 new ColumnValue("value6")
         );
+    }
+
+    private SearchResult createSearchResult() {
+        return
+                table(TABLE_ALIAS_FOO)
+                        .record(1, "name1", "value1")
+                        .record(2, "name2", "value2")
+                        .record(3, "name3", "value3")
+                        .table(TABLE_ALIAS_BAR)
+                        .record(4, "name4", "value4")
+                        .record(5, "name5", "value5")
+                        .record(6, "name6", "value6")
+                        .build();
     }
 
     @Test

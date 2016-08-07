@@ -1,4 +1,4 @@
-package imoduru.domain;
+package imoduru.domain.search;
 
 import imoduru.domain.search.expression.ConditionExpressions;
 import imoduru.domain.search.sort.SortConditions;

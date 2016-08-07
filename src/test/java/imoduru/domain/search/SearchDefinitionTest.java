@@ -1,6 +1,5 @@
 package imoduru.domain.search;
 
-import imoduru.domain.SearchResultCollector;
 import mockit.Mocked;
 import mockit.Verifications;
 import org.eclipse.collections.impl.factory.Lists;

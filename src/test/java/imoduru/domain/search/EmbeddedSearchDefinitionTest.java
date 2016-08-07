@@ -1,6 +1,5 @@
 package imoduru.domain.search;
 
-import imoduru.domain.SearchResultCollector;
 import imoduru.domain.search.input.InputParameters;
 import mockit.Expectations;
 import mockit.Mocked;
