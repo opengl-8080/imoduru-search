@@ -1,5 +1,9 @@
 package imoduru.domain;
 
+import imoduru.domain.search.expression.ConditionExpressions;
+import imoduru.domain.search.sort.SortConditions;
+import imoduru.domain.table.TableAlias;
+
 /**
  * 検索結果コレクター.
  */

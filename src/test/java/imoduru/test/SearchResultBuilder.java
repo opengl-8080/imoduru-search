@@ -1,12 +1,12 @@
 package imoduru.test;
 
-import imoduru.domain.Column;
-import imoduru.domain.ColumnValue;
-import imoduru.domain.Record;
-import imoduru.domain.SearchResult;
-import imoduru.domain.Table;
-import imoduru.domain.TableAlias;
-import imoduru.domain.TableSearchResult;
+import imoduru.domain.table.Column;
+import imoduru.domain.search.result.ColumnValue;
+import imoduru.domain.search.result.Record;
+import imoduru.domain.search.result.SearchResult;
+import imoduru.domain.table.Table;
+import imoduru.domain.table.TableAlias;
+import imoduru.domain.search.result.TableSearchResult;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.impl.factory.Lists;
@@ -20,14 +20,18 @@ public class SearchResultBuilder {
     private TableAlias tableAlias;
     private MutableList<Record> records;
 
-    public SearchResultBuilder table(String tableName) {
+    public SearchResultBuilder table(TableAlias tableAlias) {
         if (this.tableAlias != null) {
             this.searchResult.put(this.tableAlias, new TableSearchResult(this.records.toImmutable()));
         }
 
-        this.tableAlias = new TableAlias(new Table(tableName), tableName);
+        this.tableAlias = tableAlias;
         this.records = Lists.mutable.of();
         return this;
+    }
+
+    public SearchResultBuilder table(String tableName) {
+        return this.table(new TableAlias(new Table(tableName), tableName));
     }
 
     public SearchResultBuilder record(int id, String name, String value) {

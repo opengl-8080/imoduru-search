@@ -1,9 +1,9 @@
 package imoduru.test;
 
-import imoduru.domain.Column;
-import imoduru.domain.ColumnValue;
-import imoduru.domain.Record;
-import imoduru.domain.TableSearchResult;
+import imoduru.domain.table.Column;
+import imoduru.domain.search.result.ColumnValue;
+import imoduru.domain.search.result.Record;
+import imoduru.domain.search.result.TableSearchResult;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.impl.factory.Lists;
